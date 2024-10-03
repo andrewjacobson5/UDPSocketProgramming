@@ -7,12 +7,14 @@ socket.bind(('localhost', 8080))
 
 serverName = "Server of Andrew"
 while True:
+
+    
     random_int = random.randint(1, 100)
     print("ready to receive message")
     data, addr = socket.recvfrom(1024)
     if data.decode() == "exit":
         break
-    decoded_dataName = data.decode()
+    decoded_dataName = data.decode().strip()
     
     # Wait for int input
     data, addr = socket.recvfrom(1024)
@@ -29,7 +31,4 @@ while True:
 
     msg_clientNumber = decoded_dataName + "'s number is " + decoded_dataNumber
     socket.sendto(msg_clientNumber.encode("utf-8"), addr)
-
-    #msg = "Message from: " + serverName + "\n" + decoded_dataName + "'s number is " + data.decode("utf-8") + " my number is " + str(random_int)
-    #socket.sendto(msg.encode(), addr)
     
